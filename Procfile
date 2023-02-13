@@ -1,0 +1,1 @@
+web gunicorn qridentity.wsgi.apllication --log-file -
