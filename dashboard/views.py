@@ -372,12 +372,13 @@ def change_identity_card(request):
         card.division = request.POST['division']
         card.gr_no = request.POST['gr_no']
         card.gender = request.POST['gender']
-        card.dob = request.POST['dob']
+        card.dob = datetime.strptime(request.POST["dob"][2:], '%y-%m-%d')
+        print(card.dob)
         card.contact = request.POST['contact']
         card.address = request.POST['address']
         card.aadhaar = request.POST['aadhaar']
         card.save()
-        return render(request, "dashboard/view_identity_card.html", {'card': card, 'message': True, 'value': 'Card changed successfully!'})
+        return redirect(f'/manage/view_card/{card.gr_no}')
     else:
         return render(request, "dashboard/404.html")
 
